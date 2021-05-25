@@ -38,3 +38,11 @@ def process_ninja(request):
         return redirect("/")
     else:
         return redirect("/")
+
+def delete_dojo(request):
+    if request.method == "POST":
+        dojo_to_delete = dojos.objects.get(id = request.POST['delete_dojo'])
+        dojo_to_delete.delete()
+        return redirect("/")
+    else:
+        return redirect("/")
