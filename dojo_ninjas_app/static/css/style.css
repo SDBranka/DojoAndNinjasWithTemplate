@@ -43,5 +43,11 @@ button {
 
 #bottom p {
     font-weight: bolder;
+    margin-top: 5px;
+}
+
+.dojo_head {
+    display: flex;
+    margin-left: 350px;
 }
 
