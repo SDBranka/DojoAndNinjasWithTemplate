@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Dojo and Ninjas With Template</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <!-- <link rel="stylesheet" href="../static/css/style.css" -->
+    </head>
+    <body>
+        <div id="wrapper">
+            <!-- {% for error in messages %}
+                <p>{{ error }}</p>
+            {% endfor %} -->
+            <div id="top">
+                <div class="pod">
+                    <form action="/process_dojo" method="POST">
+                        {% csrf_token %}
+                        <h2>Add a Dojo</h2>
+                        <p>Name: <input name="name" type="text" required></p>
+                        <p>City: <input name="city" type="text" required></p>
+                        <p>State: <input name="state" type="text" required></p>
+                        <button id="dojoBtn" type="submit">Submit</button>  
+                    </form>
+                </div>
+                <div class="pod">
+                    <form action="/process_ninja" method="POST">
+                        {% csrf_token %}
+                        <h2>Add a Ninja</h2>
+                        <p>First Name: <input name="first_name" type="text" required></p>
+                        <p>Last Name: <input name="last_name" type="text" required></p>
+                        <p>Dojo:
+                            <select name="dojo_id">
+                                <option value="">-select a dojo-</option>
+                                {% for dojo in all_the_dojos %}
+                                    <option value="{{dojo.id}}">{{dojo.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </p>
+                        <button id="ninjaBtn" type="submit">Submit</button>  
+                    </form>
+                </div>
+            </div>      <!--end top-->
+            <div id="bottom">
+                <h2>All the Dojos</h2>
+                {% for dojo in all_the_dojos %}
+                    <p>Ninjas at the {{ dojo.name }} dojo</p>
+                    <ul>
+                        {%for ninja in dojo.ninja.all %}
+                            <li>{{ninja.first_name}} {{ninja.last_name}}</li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>      <!--end bottom-->
+        </div>          <!--end wrapper-->
+    </body>
+</html>

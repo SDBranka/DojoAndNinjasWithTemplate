@@ -1,0 +1,137 @@
+In [1]: from dojo_ninjas_app.models import dojos, ninjas
+
+
+#Query: Create 3 new dojos
+
+In [2]: dojo1 = dojos.objects.create(name = "dojo1", city = "Ann Arbor", state
+   ...: = "MI")
+In [4]: dojo2 = dojos.objects.create(name = "dojo2", city = "Marquette", state
+   ...: = "MI")
+In [5]: dojo3 = dojos.objects.create(name = "dojo3", city = "Detroit", state =
+   ...: "MI")
+
+
+#Query: Delete the 3 dojos you just created
+
+In [6]: dojo1.delete()
+Out[6]: (1, {'dojo_ninjas_app.ninjas': 0, 'dojo_ninjas_app.dojos': 1})
+
+In [7]: dojo2.delete()
+Out[7]: (1, {'dojo_ninjas_app.ninjas': 0, 'dojo_ninjas_app.dojos': 1})
+
+In [8]: dojo3.delete()
+Out[8]: (1, {'dojo_ninjas_app.ninjas': 0, 'dojo_ninjas_app.dojos': 1})
+
+In [9]: dojos.objects.all()
+Out[9]: <QuerySet []>
+
+
+#Query: Create 3 more dojos
+
+In [10]: dojo4 = dojos.objects.create(name = "dojo4", city = "Fenton", state =
+    ...: "MI")
+
+In [11]: dojo5 = dojos.objects.create(name = "dojo5", city = "Dundee", state =
+    ...: "MI")
+
+In [12]: dojo6 = dojos.objects.create(name = "dojo6", city = "Adrian", state =
+    ...: "MI")
+
+
+#Query: Create 3 ninjas that belong to the first dojo
+
+In [13]: frank = ninjas.objects.create(dojo = dojo4, first_name = "Frank", last
+    ...: _name = "Falcon")
+
+In [14]: fergus = ninjas.objects.create(dojo = dojo4, first_name = "Fergus", la
+    ...: st_name = "Fallon")
+
+In [15]: falcor = ninjas.objects.create(dojo = dojo4, first_name = "Falcor", la
+    ...: st_name = "Freedom")
+
+
+#Query: Create 3 ninjas that belong to the second dojo
+
+In [16]: dirk = ninjas.objects.create(dojo = dojo5, first_name = "Dirk", last_n
+    ...: ame = "Deerwood")
+
+In [17]: david = ninjas.objects.create(dojo = dojo5, first_name = "David", last
+    ...: _name = "Dunder")
+
+In [18]: dennis = ninjas.objects.create(dojo = dojo5, first_name = "Dennis", la
+    ...: st_name = "Duster")
+
+
+#Query: Create 3 ninjas that belong to the third dojo
+
+In [21]: amie = ninjas.objects.create(dojo = dojo6, first_name = "Amie", last_n
+    ...: ame = "Atson")
+In [22]: alex = ninjas.objects.create(dojo = dojo6, first_name = "Alex", last_n
+    ...: ame = "Armstrong")
+
+In [23]: andrew = ninjas.objects.create(dojo = dojo6, first_name = "Andrew", la
+    ...: st_name = "Atlas")
+
+
+#Query: Retrieve all the ninjas from the first dojo
+In [40]: dojos.objects.first().ninja.all()
+Out[40]: <QuerySet [<ninjas: ninjas object (4)>, <ninjas: ninjas object (5)>, <ninjas: ninjas object (6)>]>
+
+
+#Query: Retrieve all the ninjas from the last dojo
+
+In [41]: dojos.objects.last().ninja.all()
+Out[41]: <QuerySet [<ninjas: ninjas object (12)>, <ninjas: ninjas object (13)>, <ninjas: ninjas object (15)>]>
+
+
+#Query: Retrieve the last ninja's dojo
+
+In [45]: last_ninja = ninjas.objects.last()
+
+In [46]: last_ninja.dojo.name
+Out[46]: 'dojo6'
+
+
+#Add a new text field called "desc" to your Dojo class
+#Create and run the migration files to update the table in your database. If needed, provide a default value of "old dojo"
+
+In [47]: exit()
+(py3Env)
+sdbra@DESKTOP-8JVH1PB MINGW64 ~/Desktop/Coding_Dojo/Assignments/python_stack/django/django_orm/DojoAndNinjas_Shell
+$ python manage.py makemigrations
+You are trying to add a non-nullable field 'desc' to dojos without a default; we can't do that (the database needs somethi
+ng to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> a dojo
+Invalid input: unexpected EOF while parsing (<string>, line 1)
+>>> "a dojo"
+Migrations for 'dojo_ninjas_app':
+  dojo_ninjas_app\migrations\0002_dojos_desc.py
+    - Add field desc to dojos
+(py3Env)
+sdbra@DESKTOP-8JVH1PB MINGW64 ~/Desktop/Coding_Dojo/Assignments/python_stack/django/django_orm/DojoAndNinjas_Shell
+$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojo_ninjas_app, sessions
+Running migrations:
+  Applying dojo_ninjas_app.0002_dojos_desc... OK
+(py3Env)
+sdbra@DESKTOP-8JVH1PB MINGW64 ~/Desktop/Coding_Dojo/Assignments/python_stack/django/django_orm/DojoAndNinjas_Shell
+$ python manage.py shell
+Python 3.9.4 (tags/v3.9.4:1f2e308, Apr  6 2021, 13:40:21) [MSC v.1928 64 bit (AMD64)]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.23.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]: from dojo_ninjas_app.models import dojos, ninjas
+
+
+
+#Query: Create a new dojo
+In [2]: dojo7 = dojos.objects.create(name = "dojo7", city = "Canton", state = "MI", desc = "The last Dojo")
+
