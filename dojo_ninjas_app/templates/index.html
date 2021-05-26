@@ -48,16 +48,15 @@
                 <h2>All the Dojos</h2>
                 {% for dojo in all_the_dojos %}
                     <div class="dojo_head">
-                        <p>Ninjas at the {{ dojo.name }} dojo</p>
+                        <p>Ninjas at the {{ dojo.name }} dojo  ({{ dojo.ninja.all.count }}) </p>
                         <form action="/delete_dojo" method="POST">
                         {% csrf_token %}
                             <input type="hidden" name="delete_dojo" value="{{ dojo.id }}">
                             <button type="submit">Delete Dojo</button>                    
                         </form>
                     </div>
-                    
                     <ul>
-                        {%for ninja in dojo.ninja.all %}
+                        {%for ninja in dojo.ninja.all %} 
                             <li>{{ninja.first_name}} {{ninja.last_name}}</li>
                         {% endfor %}
                     </ul>
